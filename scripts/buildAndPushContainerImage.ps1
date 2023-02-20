@@ -1,0 +1,1 @@
+Write-Host "Powershell $NPM_TOKEN"
