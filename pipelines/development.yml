@@ -29,7 +29,8 @@ jobs:
         }
         Write-Host "Pipeline = $($pipeline | ConvertTo-Json -Depth 100)"
       env:
-        NPM_TOKEN: $(system.accesstoken)
+        NPM_TOKEN: $(System.AccessToken)
+      displayName: 'Set an env var'
 
     - pwsh: |
         ./scripts/buildAndPushContainerImage.ps1 `
