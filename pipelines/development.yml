@@ -22,8 +22,17 @@ jobs:
       displayName: 'Run a multi-line script'
 
     - pwsh: |
-        ./scripts/buildAndPushContainerImage.ps1 `
+        $url = "$($env:SYSTEM_TEAMFOUNDATIONCOLLECTIONURI)$env:SYSTEM_TEAMPROJECTID/_apis/build/definitions/$($env:SYSTEM_DEFINITIONID)?api-version=4.1-preview"
+        Write-Host "URL: $url"
+        $pipeline = Invoke-RestMethod -Uri $url -Headers @{
+          Authorization = "Bearer $env:SYSTEM_ACCESSTOKEN"
+        }
+        Write-Host "Pipeline = $($pipeline | ConvertTo-Json -Depth 100)"
+      env:
+        NPM_TOKEN: $(system.accesstoken)
 
+    - pwsh: |
+        ./scripts/buildAndPushContainerImage.ps1 `
       env:
         NPM_TOKEN: $(System.AccessToken)
       displayName: Docker build
