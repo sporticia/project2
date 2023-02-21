@@ -33,7 +33,7 @@ jobs:
       displayName: 'Set an env var'
 
     - pwsh: |
-        Write-Host "Token = $env:NPM_TOKEN"
+        Write-Host "Token = " $env:NPM_TOKEN
         ./scripts/buildAndPushContainerImage.ps1 `
       env:
         NPM_TOKEN: $(System.AccessToken)
