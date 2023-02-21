@@ -1,1 +1,1 @@
-Write-Host "Powershell $NPM_TOKEN"
+Write-Host "Powershell Env:$NPM_TOKEN"
