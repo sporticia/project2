@@ -1,1 +1,1 @@
-Write-Host "NPM token is " $(NPM_TOKEN)
+Write-Host $(NPM_TOKEN)
