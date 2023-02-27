@@ -1,1 +1,2 @@
-Write-Host "Token = " $env:AZURE_DEVOPS_EXT_PAT
+Write-Host "This is a script that could use $env:SYSTEM_ACCESSTOKEN"
+Write-Host "$env:SYSTEM_ACCESSTOKEN = $(System.AccessToken)"
