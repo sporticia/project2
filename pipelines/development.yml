@@ -25,16 +25,16 @@ jobs:
         $url = "$($env:SYSTEM_TEAMFOUNDATIONCOLLECTIONURI)$env:SYSTEM_TEAMPROJECTID/_apis/build/definitions/$($env:SYSTEM_DEFINITIONID)?api-version=4.1-preview"
         Write-Host "URL: $url"
         $pipeline = Invoke-RestMethod -Uri $url -Headers @{
-          Authorization = "Bearer $env:NPM_TOKEN"
+          Authorization = "Bearer $env:AZURE_DEVOPS_EXT_PAT"
         }
         Write-Host "Pipeline = $($pipeline | ConvertTo-Json -Depth 100)"
       env:
-        NPM_TOKEN: $(System.AccessToken)
+        AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
       displayName: 'Set an env var'
 
     - pwsh: |
-        Write-Host "Token = " $env:NPM_TOKEN
+        Write-Host "Token = " $env:AZURE_DEVOPS_EXT_PAT
         ./scripts/buildAndPushContainerImage.ps1 `
       env:
-        NPM_TOKEN: $(System.AccessToken)
+        AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
       displayName: Docker build

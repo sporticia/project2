@@ -1,1 +1,1 @@
-Write-Host "Token = " $env:NPM_TOKEN
+Write-Host "Token = " $env:AZURE_DEVOPS_EXT_PAT
