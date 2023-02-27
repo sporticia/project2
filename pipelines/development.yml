@@ -30,9 +30,16 @@ jobs:
         Write-Host "Pipeline = $($pipeline | ConvertTo-Json -Depth 100)"
       env:
         AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
-      displayName: 'Set an env var'
+      displayName: 'Set an env: var'
 
-    - pwsh: |
+    - pwsh: | 
+        Write-Host "This is a script that could use $env:SYSTEM_ACCESSTOKEN"
+        Write-Host "$env:SYSTEM_ACCESSTOKEN = $(System.AccessToken)"
+      env:
+        SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+      displayName: 'pwsh'
+
+    - powershell: |
         Write-Host "Token = " $env:AZURE_DEVOPS_EXT_PAT
         ./scripts/buildAndPushContainerImage.ps1 `
       env:
