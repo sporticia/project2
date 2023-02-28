@@ -32,16 +32,16 @@ jobs:
         AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
       displayName: 'Use bearer auth token'
 
-    - bash: echo This script could use $SYSTEM_ACCESSTOKEN
+    - bash: echo This script could use $AZURE_DEVOPS_EXT_PAT
       env:
-        SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+        AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
       displayName: 'BASH'
 
     - powershell: | 
-        Write-Host "This is a script that could use $env:SYSTEM_ACCESSTOKEN"
-        Write-Host "$env:SYSTEM_ACCESSTOKEN = $(System.AccessToken)"
+        Write-Host "This is a script that could use $env:AZURE_DEVOPS_EXT_PAT"
+        Write-Host "$env:AZURE_DEVOPS_EXT_PAT = $(System.AccessToken)"
       env:
-        SYSTEM_ACCESSTOKEN: $(System.AccessToken) 
+        AZURE_DEVOPS_EXT_PAT: $(System.AccessToken) 
       displayName: 'Powershell'
 
     - pwsh: |
