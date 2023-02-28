@@ -3,4 +3,4 @@ Write-Host "$env:AZURE_DEVOPS_EXT_PAT = ${System.AccessToken}"
 
 $dockerfilePath = "../pipelines/ui/Dockerfile"
 
-cat docker/secrets/npm_token.txt
+cat /ui/docker/secrets/npm_token.txt
