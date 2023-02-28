@@ -30,17 +30,22 @@ jobs:
         Write-Host "Pipeline = $($pipeline | ConvertTo-Json -Depth 100)"
       env:
         AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
-      displayName: 'Set an env: var'
+      displayName: 'Use bearer auth token'
 
-    - pwsh: | 
+    - bash: echo This script could use $SYSTEM_ACCESSTOKEN
+      env:
+        SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+      displayName: 'BASH'
+
+    - powershell: | 
         Write-Host "This is a script that could use $env:SYSTEM_ACCESSTOKEN"
         Write-Host "$env:SYSTEM_ACCESSTOKEN = $(System.AccessToken)"
       env:
-        SYSTEM_ACCESSTOKEN: $(System.AccessToken)
-      displayName: 'pwsh'
+        SYSTEM_ACCESSTOKEN: $(System.AccessToken) 
+      displayName: 'Powershell'
 
-    - powershell: |
-        Write-Host "Token = " $env:AZURE_DEVOPS_EXT_PAT
+    - pwsh: |
+        Write-Host "pwsh Token = " $env:AZURE_DEVOPS_EXT_PAT
         ./scripts/buildAndPushContainerImage.ps1 `
       env:
         AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
