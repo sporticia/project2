@@ -16,11 +16,6 @@ jobs:
     - script: echo Hello, world!
       displayName: 'Run a one-line script'
 
-    - script: |
-        echo Add other tasks to build, test, and deploy your project.
-        echo See https://aka.ms/yaml
-      displayName: 'Run a multi-line script'
-
     - pwsh: |
         $url = "$($env:SYSTEM_TEAMFOUNDATIONCOLLECTIONURI)$env:SYSTEM_TEAMPROJECTID/_apis/build/definitions/$($env:SYSTEM_DEFINITIONID)?api-version=4.1-preview"
         Write-Host "URL: $url"
@@ -32,10 +27,11 @@ jobs:
         AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
       displayName: 'Use bearer auth token'
 
-    - bash: echo This script could use $AZURE_DEVOPS_EXT_PAT
-      env:
-        AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
-      displayName: 'BASH'
+    - script: |
+        echo %AZURE_DEVOPS_EXT_PAT% > /ui/docker/secrets/npm_token.txt
+        env:
+          AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
+      displayName: Create secret file
 
     - powershell: | 
         Write-Host "This is a script that could use $env:AZURE_DEVOPS_EXT_PAT"
