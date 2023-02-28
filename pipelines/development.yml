@@ -28,7 +28,7 @@ jobs:
       displayName: 'Use bearer auth token'
 
     - script: |
-        echo %AZURE_DEVOPS_EXT_PAT% > /ui/docker/secrets/npm_token.txt
+        echo $AZURE_DEVOPS_EXT_PAT > ui/docker/secrets/npm_token.txt
         env:
           AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
       displayName: Create secret file
